@@ -1,10 +1,10 @@
 package com.cc.pos.product.productDAO;
 
-import com.cc.pos.product.requestResponse.ProductRequest;
-import com.cc.pos.product.requestResponse.ProductResponse;
+import com.cc.pos.product.requestResponse.MenuRequest;
+import com.cc.pos.product.requestResponse.MenuResponse;
 
 public interface ProductDAO {
 	
-	public ProductResponse menu(ProductRequest pr);
+	public MenuResponse menu(MenuRequest pr);
 
 }

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cc.pos.product.productDAO.ProductDAO;
-import com.cc.pos.product.requestResponse.ProductRequest;
-import com.cc.pos.product.requestResponse.ProductResponse;
+import com.cc.pos.product.requestResponse.MenuRequest;
+import com.cc.pos.product.requestResponse.MenuResponse;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -14,7 +14,7 @@ public class ProductServiceImpl implements ProductService{
 	ProductDAO productDAO;
 
 	@Override
-	public ProductResponse menu(ProductRequest pr) {
+	public MenuResponse menu(MenuRequest pr) {
 		return productDAO.menu(pr);
 	}
 

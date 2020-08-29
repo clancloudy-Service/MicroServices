@@ -5,21 +5,21 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ProductRequest {
+public class MenuRequest {
 	
 	private String accountId;
-	private String branchId;
+	private Long branchId;
 	/**
 	 * 
 	 */
-	public ProductRequest() {
+	public MenuRequest() {
 		super();
 	}
 	/**
 	 * @param accountId
 	 * @param branchId
 	 */
-	public ProductRequest(String accountId, String branchId) {
+	public MenuRequest(String accountId, Long branchId) {
 		super();
 		this.accountId = accountId;
 		this.branchId = branchId;
@@ -30,14 +30,11 @@ public class ProductRequest {
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-	public String getBranchId() {
+	public Long getBranchId() {
 		return branchId;
 	}
-	public void setBranchId(String branchId) {
+	public void setBranchId(Long branchId) {
 		this.branchId = branchId;
 	}
-	@Override
-	public String toString() {
-		return "ProductRequest [accountId=" + accountId + ", branchId=" + branchId + "]";
-	}
+
 }
