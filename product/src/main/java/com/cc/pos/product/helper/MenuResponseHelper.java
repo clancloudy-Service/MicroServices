@@ -3,10 +3,13 @@ package com.cc.pos.product.helper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.catalina.filters.AddDefaultCharsetFilter;
 
 import com.cc.pos.product.entity.Product;
+import com.cc.pos.product.entity.ProductCategory;
 import com.cc.pos.product.entity.ProductLineItem;
 import com.cc.pos.product.requestResponse.Images;
 import com.cc.pos.product.requestResponse.MenuCategory;
@@ -34,10 +37,9 @@ public interface MenuResponseHelper {
 			List<ProductLineItem> plst=pidProductLineItemMap.get(pair.getKey());
 			for(ProductLineItem p: plst)
 			{
-					List<MenuCategory> cat=new ArrayList<MenuCategory>();;
 					List<Images> ima=new ArrayList<Images>();;
-					MenuProductLineItem mpi=new MenuProductLineItem(p.getId(), p.getName(), p.getName(), 11.0, "Description", cat, ima);
-					mpi.setId(p.getId());
+					MenuProductLineItem mpi=new MenuProductLineItem(p.getId(), p.getName(), p.getName(), 11.0, "Description", createMenuCategory(p.getPcSet()), ima);
+					
 					productLineItem.add(mpi);
 			}
 			mp.setProductLineItem(productLineItem);
@@ -47,6 +49,10 @@ public interface MenuResponseHelper {
 		}		
 		menu.setProducts(products);
 		return menu;
+	}
+	default List<MenuCategory> createMenuCategory( Set<ProductCategory> pcSet){
+		return pcSet.stream().map(v->new MenuCategory(v.getId(),v.getType())).collect(Collectors.toList());
+		
 	}
 
 }
