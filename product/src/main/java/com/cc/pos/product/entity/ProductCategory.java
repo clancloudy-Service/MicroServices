@@ -9,42 +9,37 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicUpdate;
+
 
 @Entity
-@Table(name="product_line_item",schema = "public")
-@DynamicUpdate
-public class ProductLineItem {
+@Table(name = "product_category")
+public class ProductCategory {
 	
 	
 	@Id
 	private Long id;
 	private String name;
-	private Long product;
-	private Long branch;
+	private String type;
 	
+	 @ManyToMany(mappedBy = "pcSet", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	    private Set<ProductLineItem> pliSet = new HashSet<>();
+
 	
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "pli_category_junction",
-            joinColumns = {@JoinColumn(name = "product_line_item")},
-            inverseJoinColumns = {@JoinColumn(name = "product_category")}
-    )
-    private Set<ProductCategory> pcSet = new HashSet<>();
-
+	 
+	 
 	private Timestamp modifieddate;
 	private String modifiedby;
 	@Column( name = "createddate", nullable = false, updatable = false )
 	private Timestamp createddate;
 	@Column( name = "createdby", nullable = false, updatable = false )
 	private String createdby;
-	
+	public ProductCategory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Long getId() {
 		return id;
 	}
@@ -57,17 +52,17 @@ public class ProductLineItem {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getProduct() {
-		return product;
+	public String getType() {
+		return type;
 	}
-	public void setProduct(Long product) {
-		this.product = product;
+	public void setType(String type) {
+		this.type = type;
 	}
-	public Long getBranch() {
-		return branch;
+	public Set<ProductLineItem> getPliSet() {
+		return pliSet;
 	}
-	public void setBranch(Long branch) {
-		this.branch = branch;
+	public void setPliSet(Set<ProductLineItem> pliSet) {
+		this.pliSet = pliSet;
 	}
 	public Timestamp getModifieddate() {
 		return modifieddate;
@@ -94,11 +89,6 @@ public class ProductLineItem {
 		this.createdby = createdby;
 	}
 	
-	public Set<ProductCategory> getPcSet() {
-		return pcSet;
-	}
-	public void setPcSet(Set<ProductCategory> pcSet) {
-		this.pcSet = pcSet;
-	}
 	
+
 }

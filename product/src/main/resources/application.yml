@@ -4,7 +4,7 @@ spring:
     datasource:
         password: root
         platform: postgres
-        url: jdbc:postgresql://localhost:5432/ClanCloudyPOSV1
+        url: jdbc:postgresql://localhost:5432/ClanCloudyV3
         username: postgres
     jpa:
         database: POSTGRESQL
